@@ -7,10 +7,10 @@ use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use Psr\Container\ContainerInterface;
 
-$container['user_repository'] = static function (
+$container['note_repository'] = static function (
     ContainerInterface $container
-): UserRepository {
-    return new UserRepository($container->get('db'));
+): NoteRepository {
+    return new NoteRepository($container->get('db'));
 };
 
 $container['task_repository'] = static function (
@@ -19,8 +19,8 @@ $container['task_repository'] = static function (
     return new TaskRepository($container->get('db'));
 };
 
-$container['note_repository'] = static function (
+$container['user_repository'] = static function (
     ContainerInterface $container
-): NoteRepository {
-    return new NoteRepository($container->get('db'));
+): UserRepository {
+    return new UserRepository($container->get('db'));
 };
