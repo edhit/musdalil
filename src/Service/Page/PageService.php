@@ -13,8 +13,10 @@ final class PageService extends Base
         //return $this->getPageRepository()->getAllPages();
     }
 
-    public function getOne(int $pageId): object
+    public function getOne(string $pageUrl): object
     {
-        return $pageId;
+        $page = $this->pageRepository->checkAndGetPage($pageUrl)->toJson();
+
+        return $page;
     }
 }

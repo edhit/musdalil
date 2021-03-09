@@ -19,9 +19,4 @@ abstract class Base extends BaseService
     ) {
         $this->pageRepository = $pageRepository;
     }
-
-    protected function getPageRepository(): PageRepository
-    {
-        return $this->pageRepository;
-    }
 }

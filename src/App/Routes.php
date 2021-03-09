@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Controller\Note;
+use App\Controller\Page;
 use App\Controller\Task;
 use App\Controller\User;
 use App\Middleware\Auth;
@@ -22,13 +23,17 @@ $app->group('/api/v1', function () use ($app): void {
         $app->delete('/{id}', Task\Delete::class);
     })->add(new Auth());
 
+    $app->group('/pages', function () use ($app): void {
+        $app->get('/{url}', Page\GetOne::class);
+    });
+
     $app->group('/users', function () use ($app): void {
         $app->get('', User\GetAll::class)->add(new Auth());
-        $app->post('', User\Create::class);
+        $app->post('', User\Create::class)->add(new Auth());
         $app->get('/{id}', User\GetOne::class)->add(new Auth());
         $app->put('/{id}', User\Update::class)->add(new Auth());
         $app->delete('/{id}', User\Delete::class)->add(new Auth());
-    });
+    })->add(new Auth());
 
     $app->group('/notes', function () use ($app): void {
         $app->get('', Note\GetAll::class);
@@ -36,5 +41,5 @@ $app->group('/api/v1', function () use ($app): void {
         $app->get('/{id}', Note\GetOne::class);
         $app->put('/{id}', Note\Update::class);
         $app->delete('/{id}', Note\Delete::class);
-    });
+    })->add(new Auth());
 });
