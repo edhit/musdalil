@@ -15,7 +15,6 @@ final class PageService extends Base
 
     public function getOne(int $pageId): object
     {
-
         return $pageId;
     }
 }
