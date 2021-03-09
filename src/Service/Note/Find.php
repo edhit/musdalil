@@ -34,11 +34,7 @@ final class Find extends Base
 
     public function getOne(int $noteId): object
     {
-        if (self::isRedisEnabled() === true) {
-            $note = $this->getOneFromCache($noteId);
-        } else {
-            $note = $this->getOneFromDb($noteId)->toJson();
-        }
+        $note = $this->getOneFromDb($noteId)->toJson();
 
         return $note;
     }

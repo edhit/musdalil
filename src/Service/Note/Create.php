@@ -20,9 +20,6 @@ final class Create extends Base
         $mynote->updateDescription($desc);
         /** @var Note $note */
         $note = $this->noteRepository->createNote($mynote);
-        if (self::isRedisEnabled() === true) {
-            $this->saveInCache($note->getId(), $note->toJson());
-        }
 
         return $note->toJson();
     }

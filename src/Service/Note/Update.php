@@ -20,9 +20,6 @@ final class Update extends Base
         }
         /** @var Note $notes */
         $notes = $this->noteRepository->updateNote($note);
-        if (self::isRedisEnabled() === true) {
-            $this->saveInCache($notes->getId(), $notes->toJson());
-        }
 
         return $notes->toJson();
     }

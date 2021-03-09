@@ -10,8 +10,5 @@ final class Delete extends Base
     {
         $this->getOneFromDb($noteId);
         $this->noteRepository->deleteNote($noteId);
-        if (self::isRedisEnabled() === true) {
-            $this->deleteFromCache($noteId);
-        }
     }
 }

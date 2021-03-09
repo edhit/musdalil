@@ -40,11 +40,7 @@ final class TaskService extends Base
 
     public function getOne(int $taskId, int $userId): object
     {
-        if (self::isRedisEnabled() === true) {
-            $task = $this->getTaskFromCache($taskId, $userId);
-        } else {
-            $task = $this->getTaskFromDb($taskId, $userId)->toJson();
-        }
+        $task = $this->getTaskFromDb($taskId, $userId)->toJson();
 
         return $task;
     }
@@ -67,9 +63,6 @@ final class TaskService extends Base
         $mytask->updateUserId((int) $data->decoded->sub);
         /** @var Task $task */
         $task = $this->getTaskRepository()->create($mytask);
-        if (self::isRedisEnabled() === true) {
-            $this->saveInCache($task->getId(), $task->getUserId(), $task->toJson());
-        }
 
         return $task->toJson();
     }
@@ -79,9 +72,6 @@ final class TaskService extends Base
         $data = $this->validateTask($input, $taskId);
         /** @var Task $task */
         $task = $this->getTaskRepository()->update($data);
-        if (self::isRedisEnabled() === true) {
-            $this->saveInCache($task->getId(), (int) $data->getUserId(), $task->toJson());
-        }
 
         return $task->toJson();
     }
@@ -90,9 +80,6 @@ final class TaskService extends Base
     {
         $this->getTaskFromDb($taskId, $userId);
         $this->getTaskRepository()->delete($taskId, $userId);
-        if (self::isRedisEnabled() === true) {
-            $this->deleteFromCache($taskId, $userId);
-        }
     }
 
     private function validateTask(array $input, int $taskId): Task
