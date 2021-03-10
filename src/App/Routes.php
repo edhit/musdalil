@@ -24,7 +24,9 @@ $app->group('/api/v1', function () use ($app): void {
     })->add(new Auth());
 
     $app->group('/pages', function () use ($app): void {
+        $app->get('', Page\GetAll::class)->add(new Auth());
         $app->get('/{url}', Page\GetOne::class);
+        $app->delete('/{id}', Page\Delete::class)->add(new Auth());
     });
 
     $app->group('/users', function () use ($app): void {

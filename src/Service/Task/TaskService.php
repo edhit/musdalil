@@ -40,9 +40,7 @@ final class TaskService extends Base
 
     public function getOne(int $taskId, int $userId): object
     {
-        $task = $this->getTaskFromDb($taskId, $userId)->toJson();
-
-        return $task;
+        return $this->getTaskFromDb($taskId, $userId)->toJson();
     }
 
     public function create(array $input): object

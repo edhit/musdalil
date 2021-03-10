@@ -34,8 +34,6 @@ final class Find extends Base
 
     public function getOne(int $noteId): object
     {
-        $note = $this->getOneFromDb($noteId)->toJson();
-
-        return $note;
+        return $this->getOneFromDb($noteId)->toJson();
     }
 }

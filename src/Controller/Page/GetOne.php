@@ -14,7 +14,7 @@ final class GetOne extends Base
         Response $response,
         array $args
     ): Response {
-        $page = $this->getPageService()->getOne((string) $args['url']);
+        $page = $this->getPageService()->getOneByUrl((string) $args['url']);
 
         return $this->jsonResponse($response, 'success', $page, 200);
     }
