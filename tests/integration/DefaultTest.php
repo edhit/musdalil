@@ -43,7 +43,6 @@ class DefaultTest extends BaseTestCase
         $this->assertStringContainsString('message', $result);
         $this->assertStringContainsString('stats', $result);
         $this->assertStringContainsString('MySQL', $result);
-        $this->assertStringContainsString('Redis', $result);
         $this->assertStringContainsString('version', $result);
         $this->assertStringContainsString('time', $result);
         $this->assertStringNotContainsString('error', $result);

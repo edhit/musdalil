@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Controller\Note;
 use App\Controller\Page;
 use App\Controller\Task;
 use App\Controller\User;
@@ -24,24 +23,16 @@ $app->group('/api/v1', function () use ($app): void {
     })->add(new Auth());
 
     $app->group('/pages', function () use ($app): void {
-        $app->get('', Page\GetAll::class)->add(new Auth());
+        $app->post('', Page\Create::class);
         $app->get('/{url}', Page\GetOne::class);
         $app->delete('/{id}', Page\Delete::class)->add(new Auth());
     });
 
     $app->group('/users', function () use ($app): void {
         $app->get('', User\GetAll::class)->add(new Auth());
-        $app->post('', User\Create::class)->add(new Auth());
+        $app->post('', User\Create::class);
         $app->get('/{id}', User\GetOne::class)->add(new Auth());
         $app->put('/{id}', User\Update::class)->add(new Auth());
         $app->delete('/{id}', User\Delete::class)->add(new Auth());
-    })->add(new Auth());
-
-    $app->group('/notes', function () use ($app): void {
-        $app->get('', Note\GetAll::class);
-        $app->post('', Note\Create::class);
-        $app->get('/{id}', Note\GetOne::class);
-        $app->put('/{id}', Note\Update::class);
-        $app->delete('/{id}', Note\Delete::class);
-    })->add(new Auth());
+    });
 });
