@@ -2,10 +2,19 @@
 
 declare(strict_types=1);
 
+use App\Service\Order\OrderService;
 use App\Service\Page\PageService;
 use App\Service\Task\TaskService;
 use App\Service\User;
 use Psr\Container\ContainerInterface;
+
+$container['order_service'] = static function (
+    ContainerInterface $container
+): OrderService {
+    return new OrderService(
+        $container->get('order_repository')
+    );
+};
 
 $container['page_service'] = static function (
     ContainerInterface $container
